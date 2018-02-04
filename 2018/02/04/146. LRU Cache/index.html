@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="146. LRU Cache本题基本训练点：
+1.链表基本操作  
+2.构建新的数据结构  
+3.hash的基本使用
+
+我的第一思路是优先队列（PriorityQueue),但是仔细审题过后，我发现每一个新进来的元素就自带最高优先级，因此链表就可以满足要求，链表的前后就可以表示优先级，优先级低的在头">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="zym">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="146.LRU"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="zhuyamei"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>146.LRU - zhuyamei</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+	
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Configurable Title</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/klugjo/hexo-theme-clean-blog">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>146.LRU</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2018-02-04
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="146-LRU-Cache"><a href="#146-LRU-Cache" class="headerlink" title="146. LRU Cache"></a>146. LRU Cache</h1><pre><code>本题基本训练点：
+1.链表基本操作  
+2.构建新的数据结构  
+3.hash的基本使用
+</code></pre><ul>
+<li>我的第一思路是优先队列（PriorityQueue),但是仔细审题过后，我发现每一个新进来的元素就自带最高优先级，因此链表就可以满足要求，链表的前后就可以表示优先级，优先级低的在头，高的在尾。另外，由于我们要删除一个元素，可以使用double linkedlist，单向链表删除元素需要其他的reference.</li>
+<li>get时使用hash效率最高。</li>
+<li>put: <ol>
+<li>key在cache：改变当前key的优先级</li>
+<li>key不在cache中且 cache满了：删除头部，加入到尾巴；</li>
+<li>key不在cache中且cache不满：加入到尾巴</li>
+</ol>
+</li>
+<li><p>get:</p>
+<ol>
+<li>如果key在map中，返回其值，同时改变其优先级。</li>
+<li>如果key不在，返回-1.</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span> </span>&#123;   </span><br><span class="line">    <span class="keyword">int</span> capacity;</span><br><span class="line">    HashMap&lt;Integer,DLinkedNode&gt; cache;</span><br><span class="line">    DLinkedNode head = <span class="keyword">null</span>;</span><br><span class="line">    DLinkedNode tail = <span class="keyword">null</span>; </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LRUCache</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.capacity = capacity; </span><br><span class="line">        cache = <span class="keyword">new</span> HashMap&lt;Integer,DLinkedNode&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(cache.containsKey(key))&#123;</span><br><span class="line">            DLinkedNode node = cache.get(key);</span><br><span class="line">            node.update();</span><br><span class="line">            <span class="keyword">return</span> node.value;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(cache.containsKey(key))&#123;</span><br><span class="line">            DLinkedNode node = cache.get(key);</span><br><span class="line">            node.value = value;</span><br><span class="line">            node.update();</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(capacity == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">if</span>(cache.size() == capacity)&#123;</span><br><span class="line">                cache.remove(head.key);</span><br><span class="line">                head.removeHead();</span><br><span class="line">            &#125;</span><br><span class="line">            DLinkedNode node = <span class="keyword">new</span> DLinkedNode(key,value);</span><br><span class="line">            node.append();</span><br><span class="line">            cache.put(key,node);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DLinkedNode</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    DLinkedNode pre = <span class="keyword">null</span>;</span><br><span class="line">    DLinkedNode next = <span class="keyword">null</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DLinkedNode</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.key = key;</span><br><span class="line">        <span class="keyword">this</span>.value = value;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeHead</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//if 'this' is the only node</span></span><br><span class="line">        <span class="keyword">if</span>(tail == <span class="keyword">this</span>)&#123;</span><br><span class="line">            head = <span class="keyword">null</span>;</span><br><span class="line">            tail = <span class="keyword">null</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            head = <span class="keyword">this</span>.next;</span><br><span class="line">            head.pre = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="comment">//delete + append</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span> == tail) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//delete the node;</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">this</span> == head)&#123;</span><br><span class="line">                head = <span class="keyword">this</span>.next;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">this</span>.pre.next = <span class="keyword">this</span>.next;          </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">this</span>.next.pre = <span class="keyword">this</span>.pre;</span><br><span class="line">            <span class="comment">//add the node to tail</span></span><br><span class="line">            <span class="keyword">this</span>.append();</span><br><span class="line">        &#125;       </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">append</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//append the first node</span></span><br><span class="line">        <span class="keyword">if</span>(tail == <span class="keyword">null</span>)&#123;</span><br><span class="line">            head = <span class="keyword">this</span>;</span><br><span class="line">            tail = <span class="keyword">this</span>;</span><br><span class="line">        <span class="comment">//append as tail</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            tail.next = <span class="keyword">this</span>;</span><br><span class="line">            <span class="keyword">this</span>.pre = tail;</span><br><span class="line">            <span class="keyword">this</span>.next = <span class="keyword">null</span>;</span><br><span class="line">            tail = <span class="keyword">this</span>;            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your LRUCache object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * LRUCache obj = new LRUCache(capacity);</span></span><br><span class="line"><span class="comment"> * int param_1 = obj.get(key);</span></span><br><span class="line"><span class="comment"> * obj.put(key,value);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>需要Double LinkedList，那么要自己在外面定义node，在要使用这个list的时候定义head，tail</p>
+</li>
+<li>需要updata，就是将该节点移到尾巴，此步可被分解成两步：1. 删除原节点 2.在尾巴加入该节点</li>
+<li>链表普通节点和头部节点的delete/append需要区分对待。</li>
+<li>DLinkedNode 需要定义在 LRUCache内部。<br>##Time complexity<br>Append: O(1);<br>Update: O(1);<br>Remove: O(1);</li>
+</ul>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/klugjo/hexo-theme-clean-blog" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2018 zym<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
