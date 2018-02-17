@@ -10,6 +10,10 @@
 
     <!--Description-->
     
+        <meta name="description" content="84. Largest Rectangular in Histogram知识点：递增栈
+
+Our main goal is to find the first smaller (smaller than ‘x’) bar on left of ‘x’ and index of first small">
+    
 
     <!--Author-->
     
@@ -18,7 +22,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Yamei Zhu"/>
+        <meta property="og:title" content="146.LRU Cache"/>
     
 
     <!--Open Graph Description-->
@@ -29,7 +33,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -40,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>Archiv: 2018 - Yamei Zhu</title>
+    <title>146.LRU Cache - Yamei Zhu</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -142,75 +146,89 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>2018</h1>
+                <div class="post-heading">
+                    <h1>146.LRU Cache</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2018-02-04
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/Leetcode/">#Leetcode</a> <a href="/tags/Algorithm/">#Algorithm</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/Algorithm/">Algorithm</a>
+
+                    
+                </div>
             
-                <div class="post-preview">
-    <a href="/2018/02/04/146-LRU-Cache/">
-        <h1 class="post-title archive">
-            146.LRU Cache
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-02-04
-    </p>
-</div>
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2018/02/04/84-largest-rectangular/">
-        <h1 class="post-title archive">
-            146.LRU Cache
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-02-04
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/01/15/move-on/">
-        <h1 class="post-title archive">
-            Move On
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-01-15
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-    
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="84-Largest-Rectangular-in-Histogram"><a href="#84-Largest-Rectangular-in-Histogram" class="headerlink" title="84. Largest Rectangular in Histogram"></a>84. Largest Rectangular in Histogram</h1><pre><code>知识点：递增栈
+</code></pre><ul>
+<li>Our main goal is to find the first smaller (smaller than ‘x’) bar on left of ‘x’ and index of first smaller bar on right of ‘x’. </li>
+<li>We traverse all bars from left to right, maintain a stack of bars. Every bar is pushed to stack once. A bar is popped from stack when a bar of smaller height is seen.</li>
+<li>When a bar is popped, we calculate the area with the popped bar as smallest bar.</li>
+<li>递增栈可以记录左边第一个比当前值小的位置，同时当右边第一个比他小的位置出现时，可以pop出来，这样keep track of了两个valid position.</li>
+<li>栈的典型应用：1.逆序输出 2.递归嵌套 3.延时缓冲 4.逆波兰表达式</li>
 </ul>
+<p><img src="media/15186566560410/15188122168369.jpg" alt=""></p>
+<p>为什么不记录当前栈里最大值的下标 反而要去找最大值的左边那个下标？<br>因为左边才是左边界 我们要找的两个低柱子中间夹着的方块面积。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="keyword">int</span>[] heights)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(heights == <span class="keyword">null</span> || heights.length ==  <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">        <span class="keyword">int</span> len = heights.length;</span><br><span class="line">        <span class="keyword">int</span> maxRec = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= len; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> cur = i==len ? <span class="number">0</span> : heights[i];</span><br><span class="line">            <span class="keyword">while</span>(!stack.isEmpty()  &amp;&amp; cur &lt; heights[stack.peek()])&#123;</span><br><span class="line">                <span class="keyword">int</span> cur_highest_index = stack.pop();</span><br><span class="line">                <span class="keyword">int</span> left = stack.isEmpty()? -<span class="number">1</span> : stack.peek();</span><br><span class="line">                maxRec = Math.max(maxRec, heights[cur_highest_index]*(i-left-<span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            stack.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">     <span class="keyword">return</span> maxRec;   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>####Time complexity：<br>space: O( n )<br>time: O( n^2 )</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
         </div>
     </div>
-</div>
-
+</article>
 
     <!-- Footer -->
     <hr />
